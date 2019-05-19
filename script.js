@@ -11,6 +11,9 @@
     var keyDown = function(e) {
         if(results.length < 1) return;
 
+        var focusedElt = document.activeElement;
+        if(focusedElt && focusedElt.nodeName.toLowerCase() == "input") return;
+
         var curLinkIndex = linkIndex;
         // Cycle focus through each link
         switch(e.key)
