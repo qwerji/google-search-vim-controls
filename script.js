@@ -2,14 +2,27 @@
 // Cycles through each result link using j and k like vim 
 
 (function() {
-    // Get all the search results links
-    var results = document.querySelectorAll(".r > a:first-child");
+
+    var focusedSelector = "gsvcfocused";
+
+    // insert custom style tag
+    var style = document.createElement("style");
+    style.textContent = "#" + focusedSelector + " { background: #E3FBE3; border-radius: 8px; }";
+    document.head.appendChild(style);
+
+    // Get all the search results - only doing the regular text links
+    var results = document.querySelectorAll("#rso > [class=\"g\"]");
 
     // Starting at -1 so that on load the initial focus will work
     var linkIndex = -1;
 
-    var keyDown = function(e) {
+    function keydown(e) {
         if(results.length < 1) return;
+
+        // remove styling for all results
+        for (var i = 0; i < results.length; i++) {
+            results[i].id = "";
+        }
 
         var focusedElt = document.activeElement;
         if(focusedElt && focusedElt.nodeName.toLowerCase() == "input") return;
@@ -36,12 +49,14 @@
             } else if(linkIndex > results.length - 1) {
                 linkIndex = 0;
             }
-            results[linkIndex].focus();
+            // focus the link, apply selector to result element
+            var link = results[linkIndex].querySelector(".r a").focus();
+            results[linkIndex].id = focusedSelector;
         }
     };
-    document.addEventListener("keydown", keyDown);
+    document.addEventListener("keydown", keydown);
     
     // Focus the first link
-    keyDown({ key: "j" });
+    // keydown({ key: "j" });
 })();
 
