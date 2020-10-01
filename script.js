@@ -17,7 +17,7 @@
     var linkIndex = -1;
 
     function keydown(e) {
-        if(results.length < 1) return;
+        if (results.length < 1) return;
 
         // remove styling for all results
         for (var i = 0; i < results.length; i++) {
@@ -25,11 +25,11 @@
         }
 
         var focusedElt = document.activeElement;
-        if(focusedElt && focusedElt.nodeName.toLowerCase() == "input") return;
+        if (focusedElt && focusedElt.nodeName.toLowerCase() === "input") return;
 
         var curLinkIndex = linkIndex;
         // Cycle focus through each link
-        switch(e.key)
+        switch (e.key)
         {
             case "j":
             {
@@ -43,20 +43,21 @@
         }
         
         // Only focus if the linkIndex has changed
-        if(linkIndex != curLinkIndex) {
-            if(linkIndex < 0) {
+        if (linkIndex !== curLinkIndex) {
+            if (linkIndex < 0) {
                 linkIndex = results.length - 1;
             } else if(linkIndex > results.length - 1) {
                 linkIndex = 0;
             }
             // focus the link, apply selector to result element
-            var link = results[linkIndex].querySelector(".r a").focus();
+            var link = results[linkIndex].querySelector("a");
+            if (link) {
+                link.focus();
+            }
             results[linkIndex].id = focusedSelector;
         }
-    };
+    }
+
     document.addEventListener("keydown", keydown);
-    
-    // Focus the first link
-    // keydown({ key: "j" });
 })();
 
