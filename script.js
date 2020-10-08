@@ -11,7 +11,7 @@
 
     // get user preferences
     chrome.storage.sync.get(['gsvc-prefs'], function(result) {
-        if (result) {
+        if (result && result['gsvc-prefs']) {
             preferences = result['gsvc-prefs'];
         }
 
