@@ -1,17 +1,28 @@
-// -- Google Search Vim Controls --
-// Cycles through each result link using j and k like vim 
-
 (function() {
 
-    var focusedSelector = "gsvcfocused";
+    var preferences = {
+        // NOTE(BTS): keep this in sync with options
+        resultId: "gsvcfocused",
+        resultsSelector: "#rso > [class=\"g\"]",
+        linkSelector: "a",
+        resultHighlightCss: "background: #E3FBE3;\nborder-radius: 8px;"
+    };
+    var results = [];
 
-    // insert custom style tag
-    var style = document.createElement("style");
-    style.textContent = "#" + focusedSelector + " { background: #E3FBE3; border-radius: 8px; }";
-    document.head.appendChild(style);
+    // get user preferences
+    chrome.storage.sync.get(['gsvc-prefs'], function(result) {
+        if (result) {
+            preferences = result['gsvc-prefs'];
+        }
 
-    // Get all the search results - only doing the regular text links
-    var results = document.querySelectorAll("#rso > [class=\"g\"]");
+        // insert custom style tag
+        var style = document.createElement("style");
+        style.textContent = "#" + preferences.resultId + " {\n" + preferences.resultHighlightCss + "\n}\n";
+        document.head.appendChild(style);
+
+        // Get all the search results - only doing the regular text links
+        results = document.querySelectorAll(preferences.resultsSelector);
+    });
 
     // Starting at -1 so that on load the initial focus will work
     var linkIndex = -1;
@@ -54,7 +65,7 @@
             if (link) {
                 link.focus();
             }
-            results[linkIndex].id = focusedSelector;
+            results[linkIndex].id = preferences.resultId;
         }
     }
 

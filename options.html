@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+    <title>Google Search Vim Controls - Options</title>
+</head>
+<link rel="stylesheet" href="terminal.min.css">
+<style>
+    html {
+        min-width: 500px;
+        overflow: hidden;
+    }
+
+    .terminal-card {
+        margin-bottom: 1px;
+    }
+
+    .terminal-card>div:first-of-type {
+        height: 550px;
+        overflow-y: scroll;
+    }
+
+    fieldset {
+        margin-top: 5px;
+    }
+
+    #revert {
+        font-size: 12px;
+        margin-left: auto;
+        margin-right: 0;
+        display: block;
+    }
+
+    :root {
+        --global-font-size: 15px;
+        --global-line-height: 1.4em;
+        --global-space: 10px;
+        --font-stack: Menlo, Monaco, Lucida Console, Liberation Mono,
+        DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
+        serif;
+        --mono-font-stack: Menlo, Monaco, Lucida Console, Liberation Mono,
+        DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace,
+        serif;
+        --background-color: #222225;
+        --page-width: 60em;
+        --font-color: #e8e9ed;
+        --invert-font-color: #222225;
+        --secondary-color: #a3abba;
+        --tertiary-color: #a3abba;
+        --primary-color: #62c4ff;
+        --error-color: #ff3c74;
+        --progress-bar-background: #3f3f44;
+        --progress-bar-fill: #62c4ff;
+        --code-bg-color: #3f3f44;
+        --input-style: solid;
+        --display-h1-decoration: none;
+    }
+</style>
+<body>
+<div class="terminal-card">
+    <header>
+        <div class="terminal-prompt">google search vim controls options</div>
+    </header>
+    <div>
+        <button id="revert" class="btn btn-primary btn-ghost">Revert to defaults</button>
+        <fieldset>
+            <legend>Basic</legend>
+            <div class="form-group">
+                <label for="resultHighlightCss">
+                    CSS attributes to assign to the currently selected result:
+                </label>
+                <textarea class="option" id="resultHighlightCss" cols="30" rows="5"></textarea>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Advanced</legend>
+            <div class="form-group">
+                <em>Don't change these unless you know what you're doing.</em>
+            </div>
+            <div class="form-group">
+                <label for="resultId">
+                    id for tagging the currently selected result:
+                </label>
+                <input type="text" class="option" id="resultId">
+            </div>
+
+            <div class="form-group">
+                <label for="resultsSelector">
+                    CSS selector for each selectable search result:
+                </label>
+                <input type="text" class="option" id="resultsSelector">
+            </div>
+
+            <div class="form-group">
+                <label for="linkSelector">
+                    CSS selector for the focused link inside each result:
+                </label>
+                <input type="text" class="option" id="linkSelector">
+            </div>
+        </fieldset>
+    </div>
+</div>
+<script src="options.js"></script>
+</body>
+</html>
+
